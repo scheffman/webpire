@@ -15,12 +15,12 @@ class dataBase {
     }
 
     function createTable($table, $cols) {
-        $query = 'CREATE TABLE IF NOT EXISTS ' .$table. ' (';
+        $query = 'CREATE TABLE ' .$table. ' (';
         foreach ($cols as $key => $value) {
-            $query = $query .$key .' ' .$value .', ';
+            $query .= $key .' ' .$value .', ';
         }
         $query = rtrim($query, ', ');
-        $query = $query .')';
+        $query .= ')';
         # debugg, remove later
         echo $query;
         $this->conn->exec($query);
@@ -31,8 +31,8 @@ class dataBase {
         $values = '';
         $query = 'INSERT INTO ' .$table. ' (';
         foreach ($cols as $key => $value) {
-            $keys = $keys .$key. ', ';
-            $values = $values .$value. ', ';
+            $keys .= $key. ', ';
+            $values .= '\'' .$value. '\', ';
         }
         $keys = rtrim($keys, ', ');
         $values = rtrim($values, ', ');
