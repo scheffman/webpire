@@ -46,6 +46,19 @@ class dataBase {
         echo $last_id;
     }
 
+    function select($table, $cols) {
+        $query = 'SELECT ';
+        foreach ($cols as $col) {
+            $query .= $col. ', ';
+        }
+        $query = rtrim($query, ', ');
+        $query .= ' FROM ' .$table;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     function disconnect() {
         $conn = null;
         echo 'Disconnected';
